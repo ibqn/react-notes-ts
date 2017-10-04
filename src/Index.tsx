@@ -3,7 +3,8 @@ import * as ReactDOM from "react-dom";
 
 import { Note } from "./components/Note";
 
+
 ReactDOM.render(
-    <Note compiler="TypeScript 2.5.x" framework="React 16.x"></Note>,
+    <Note>Hello People</Note>,
     document.getElementById("root")
 );
