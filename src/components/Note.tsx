@@ -1,40 +1,48 @@
 import * as React from "react";
 
 
-export interface NoteProps {
-    editing?: boolean;
-}
-
 export interface NoteState {
     editing: boolean;
+    newText: string;
 }
 
 export class Note extends React.Component<undefined, NoteState> {
-    state : NoteState;
+    state: NoteState;
 
-    constructor () {
+    constructor() {
         super();
-        this.state  = { editing: true };
+        this.state = { editing: false, newText: 'noo' };
+        //this.handleChange = this.handleChange.bind(this);
     }
 
     close() {
-        alert("close");
+        console.log("close");
     }
 
-    edit = () => {
-        this.setState((prevState, props) => ({editing:true}));
+    public edit() : void {
+        this.setState((prevState, props) => ({ editing: true }));
     }
 
-    save = () => {
-        this.setState({editing: false });
+    public save() : void {
+        console.log(`text is ${this.state.newText}`);
+
+        this.setState({ editing: false });
+    }
+
+    handleChange = (e : React.ChangeEvent<HTMLTextAreaElement>) => {
+        this.setState({newText: e.target.value});
     }
 
     public renderForm() {
+        const newText = this.state.newText;
         return(
             <div className="note">
-                <textarea></textarea>
+                <textarea
+                    value={newText}
+                    //onChange={e => this.setState({ newText: e.target.value })}/>
+                    onChange={this.handleChange}/>
                 <span>
-                    <button onClick={this.save}>SAFE</button>
+                    <button onClick={() => this.save()}>SAFE</button>
                 </span>
             </div>
         );
@@ -45,7 +53,7 @@ export class Note extends React.Component<undefined, NoteState> {
             <div className="note">
                 <p>{this.props.children}</p>
                 <span>
-                    <button onClick={this.edit}>EDIT</button>
+                    <button onClick={() => this.edit()}>EDIT</button>
                     <button onClick={this.close}>X</button>
                 </span>
             </div>
