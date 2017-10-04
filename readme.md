@@ -1,6 +1,6 @@
 # Example of an react based app written with typescript #
 
-![Sticky notes](Notes.png)
+![Sticky notes](sticky-notes.png)
 
     npm install
     npm start
