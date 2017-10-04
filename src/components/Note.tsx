@@ -12,7 +12,6 @@ export class Note extends React.Component<undefined, NoteState> {
     constructor() {
         super();
         this.state = { editing: false, newText: 'noo' };
-        //this.handleChange = this.handleChange.bind(this);
     }
 
     close() {
@@ -29,7 +28,7 @@ export class Note extends React.Component<undefined, NoteState> {
         this.setState({ editing: false });
     }
 
-    handleChange = (e : React.ChangeEvent<HTMLTextAreaElement>) => {
+    handleChange(e : React.ChangeEvent<HTMLTextAreaElement>) {
         this.setState({newText: e.target.value});
     }
 
@@ -39,8 +38,7 @@ export class Note extends React.Component<undefined, NoteState> {
             <div className="note">
                 <textarea
                     value={newText}
-                    //onChange={e => this.setState({ newText: e.target.value })}/>
-                    onChange={this.handleChange}/>
+                    onChange={e => this.handleChange(e)}/>
                 <span>
                     <button onClick={() => this.save()}>SAFE</button>
                 </span>
