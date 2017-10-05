@@ -26,12 +26,14 @@ div.note {
   margin: 2px 0;
   position: absolute;
   cursor: -webkit-grab;
+  cursor: grab;
   box-shadow: 5px 5px 15px 0 rgba(0, 0, 0, .2);
   overflow: hidden;
 }
 
 div.note:active {
   cursor: -webkit-grabbing;
+  cursor: grabbing;
 }
 
 div.note p {
