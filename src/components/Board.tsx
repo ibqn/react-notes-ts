@@ -7,7 +7,7 @@ export interface BoardProps { count: number; }
 
 export interface BoardState { notes: string[]; }
 
-export class Board extends React.Component<BoardProps, BoardState> {
+export class Board extends React.Component {
     props: BoardProps;
     state: BoardState;
 
@@ -19,6 +19,7 @@ export class Board extends React.Component<BoardProps, BoardState> {
                 'one',
                 'two',
                 'three',
+                'Hello People',
             ],
         };
     }
@@ -26,7 +27,9 @@ export class Board extends React.Component<BoardProps, BoardState> {
     render() {
         return (
             <div className='board'>
-                {this.state.notes.map((note, i) => {return <Note key={i}>{note}</Note>})}
+                {this.state.notes.map((note, i) => {
+                    return <Note key={i}>{note}</Note>
+                })}
             </div>
         );
     }

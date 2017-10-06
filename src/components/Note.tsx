@@ -4,11 +4,11 @@ import * as React from "react";
 export interface NoteState {
     editing: boolean;
     newText: string;
-    style: { top: string, right: string}
 }
 
-export class Note extends React.Component<undefined, NoteState> {
+export class Note extends React.Component {
     state: NoteState;
+    style: { top: string, right: string }
 
     constructor() {
         super();
@@ -17,7 +17,7 @@ export class Note extends React.Component<undefined, NoteState> {
 
     componentWillMount()
     {
-        this.state.style = {
+        this.style = {
             top: `${this.randomBetween(0, window.innerHeight - 150)}px`,
             right: `${this.randomBetween(0, window.innerWidth - 150)}px`,
         };
@@ -48,7 +48,7 @@ export class Note extends React.Component<undefined, NoteState> {
     public renderForm() {
         const newText = this.state.newText;
         return(
-            <div className="note" style={this.state.style}>
+            <div className="note" style={this.style}>
                 <textarea
                     value={newText}
                     onChange={e => this.handleChange(e)}/>
@@ -61,7 +61,7 @@ export class Note extends React.Component<undefined, NoteState> {
 
     public renderDisplay() {
         return(
-            <div className="note" style={this.state.style}>
+            <div className="note" style={this.style}>
                 <p>{this.props.children}</p>
                 <span>
                     <button onClick={() => this.edit()}>edit</button>
