@@ -1,18 +1,28 @@
 import * as React from "react";
 
 
-export interface NoteState {
+interface NoteState {
     editing: boolean;
     newText: string;
 }
 
+interface NoteProps {
+    onChange(id: number, note: string): void;
+    id: number;
+    children: string;
+}
+
 export class Note extends React.Component {
+    props: NoteProps;
     state: NoteState;
     style: { top: string, right: string }
 
     constructor() {
         super();
-        this.state = { editing: false, newText: 'noo' } as NoteState;
+
+        this.state = {
+            editing: false,
+        } as NoteState;
     }
 
     componentWillMount()
@@ -21,6 +31,8 @@ export class Note extends React.Component {
             top: `${this.randomBetween(0, window.innerHeight - 150)}px`,
             right: `${this.randomBetween(0, window.innerWidth - 150)}px`,
         };
+
+        this.setState({ newText: this.props.children });
     }
 
     private randomBetween(a: number, b: number): number {
@@ -36,13 +48,13 @@ export class Note extends React.Component {
     }
 
     public save() : void {
-        console.log(`text is ${this.state.newText}`);
+        this.props.onChange(this.props.id, this.state.newText)
 
         this.setState({ editing: false });
     }
 
     handleChange(e : React.ChangeEvent<HTMLTextAreaElement>) {
-        this.setState({newText: e.target.value});
+        this.setState({ newText: e.target.value });
     }
 
     public renderForm() {
