@@ -17,22 +17,28 @@ export class Note extends React.Component {
     state: NoteState;
     style: { top: string, right: string }
 
-    constructor() {
-        super();
+    constructor(props: NoteProps) {
+        super(props);
 
         this.state = {
             editing: false,
         } as NoteState;
-    }
 
-    componentWillMount()
-    {
         this.style = {
             top: `${this.randomBetween(0, window.innerHeight - 150)}px`,
             right: `${this.randomBetween(0, window.innerWidth - 150)}px`,
         };
+    }
 
-        this.setState({ newText: this.props.children });
+    static getDerivedStateFromProps(props: NoteProps, state: NoteState) {
+        if (props.children !== state.newText) {
+            return {
+                newText: props.children,
+            } as NoteState;
+        }
+
+        // Return null to indicate no change to state.
+        return null;
     }
 
     private randomBetween(a: number, b: number): number {
@@ -43,17 +49,17 @@ export class Note extends React.Component {
         console.log("close");
     }
 
-    public edit() : void {
+    public edit(): void {
         this.setState((prevState, props) => ({ editing: true }));
     }
 
-    public save() : void {
+    public save(): void {
         this.props.onChange(this.props.id, this.state.newText)
 
         this.setState({ editing: false });
     }
 
-    handleChange(e : React.ChangeEvent<HTMLTextAreaElement>) {
+    handleChange(e: React.ChangeEvent<HTMLTextAreaElement>) {
         this.setState({ newText: e.target.value });
     }
 

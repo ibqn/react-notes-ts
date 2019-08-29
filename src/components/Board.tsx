@@ -1,6 +1,8 @@
 import * as React from 'react';
 
-import { Note } from "./Note";
+import {
+    Note,
+} from "./Note";
 
 
 interface BoardProps { count: number; }
@@ -16,8 +18,8 @@ export class Board extends React.Component {
     props: BoardProps;
     state: BoardState;
 
-    constructor() {
-        super();
+    constructor(props: BoardProps) {
+        super(props);
 
         this.state = {
             notes: [
